@@ -22,7 +22,6 @@ function Postpage() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res);
         if (res.data.isLoggedIn === false) {
           navigate("/login");
         } else {

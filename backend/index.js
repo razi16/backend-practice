@@ -47,17 +47,13 @@ const fileFilter = (req, file, cb) => {
 let upload = multer({ storage, fileFilter });
 
 const verifyJWT = (req, res, next) => {
-  /* const token = req.headers["cookie"]?.split("token=")[1]; */
-  console.log(req.headers.cookie);
   const token = decodeURIComponent(
     req.headers["cookie"]?.replace("token=Bearer%20", "")
   );
-  /*  console.log(req.headers.cookie);  */
-  console.log(token);
+
   if (token) {
     jwt.verify(token, "abcd", (err, decoded) => {
       if (err) {
-        /*  console.log(err); */
         res.json({
           isLoggedIn: false,
           message: "Authentication failed",
@@ -123,7 +119,6 @@ app.get("/logout", verifyJWT, (req, res) => {
 });
 
 app.post("/register", upload.single("photo"), async (req, res) => {
-  console.log(req.file);
   const checkEmail = await userModel.findOne({ email: req.body.email });
   if (checkEmail) {
     res.json({

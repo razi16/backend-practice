@@ -10,20 +10,13 @@ function Upload() {
     const formData = new FormData();
     formData.append("caption", caption);
     formData.append("image", image);
-    axios
-      .post("http://localhost:4000/post/upload", formData, {
-        withCredentials: true,
-      })
-      .then((res) => console.log(res));
+    axios.post("http://localhost:4000/post/upload", formData, {
+      withCredentials: true,
+    });
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "http://localhost:4000/auth",
-        { withCredentials: true } /* { headers } */
-      )
-      .then((res) => console.log(res));
+    axios.get("http://localhost:4000/auth", { withCredentials: true });
   }, []);
 
   return (

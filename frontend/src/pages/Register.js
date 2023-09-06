@@ -8,9 +8,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState();
 
-  useEffect(() => {
-    console.log(photo);
-  }, [photo]);
+  useEffect(() => {}, [photo]);
 
   const register = (e) => {
     e.preventDefault();
@@ -19,9 +17,7 @@ function Register() {
     formData.append("username", username);
     formData.append("password", password);
     formData.append("photo", photo);
-    axios
-      .post("http://localhost:4000/register", formData)
-      .then((res) => console.log(res));
+    axios.post("http://localhost:4000/register", formData);
   };
 
   return (

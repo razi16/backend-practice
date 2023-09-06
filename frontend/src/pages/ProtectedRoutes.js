@@ -4,7 +4,6 @@ import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function ProtectedRoutes() {
-  const { login, setLogin } = useContext(LoginContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +13,6 @@ function ProtectedRoutes() {
         { withCredentials: true } /* { headers } */
       )
       .then((res) => {
-        console.log(res);
         if (!res.data.isLoggedIn) {
           navigate("/login");
         }

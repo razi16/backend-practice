@@ -29,13 +29,10 @@ const fileFilter = (req, file, cb) => {
 let upload = multer({ storage, fileFilter });
 
 const verifyJWT = (req, res, next) => {
-  /* const token = req.headers["cookie"]?.split("token=")[1]; */
-  //console.log(req.headers.cookie);
   const token = decodeURIComponent(
     req.headers["cookie"]?.replace("token=Bearer%20", "")
   );
-  /*  console.log(req.headers.cookie);  */
-  //console.log(token);
+
   if (token) {
     jwt.verify(token, "abcd", (err, decoded) => {
       if (err) {
@@ -92,7 +89,7 @@ router.post("/upload", verifyJWT, upload.single("image"), async (req, res) => {
     uploadedBy: req.user.id,
   });
   await data.save();
-  console.log(data);
+
   res.json({
     message: "image uploaded",
   });
